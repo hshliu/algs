@@ -134,7 +134,33 @@ void demoReverseSinglyLinkedList() {
     head = freeList(head);
     display(head);
 }
+
+void deleteLastKth(struct Node *head, int k) {
+    if (!head)
+        return;
+
+    printf("before delete, the list:");
+    display(head);
+    struct Node *tmp = NULL;
+    struct Node * reversed_node = reverse(head);
+    for(int i=0;i<k && reversed_node != NULL;i++) {
+        tmp = reversed_node;
+        reversed_node = reversed_node -> next;
+        free(tmp);
+    }
+    head = reverse(reversed_node);
+    printf("after delete, the list:");
+    display(head);
+}
+
+void demoDeleteLastKth() {
+    deleteLastKth(createNodeList(10), 0);
+    deleteLastKth(createNodeList(10), 1);
+    deleteLastKth(createNodeList(10), 2);
+    deleteLastKth(createNodeList(10), 12);
+}
 void main() {
     //demoReverseSinglyLinkedList();
-    demoCheckCircleLinkedList();
+    //demoCheckCircleLinkedList();
+    demoDeleteLastKth();
 }
